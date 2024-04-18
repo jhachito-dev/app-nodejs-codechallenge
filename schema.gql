@@ -11,17 +11,17 @@ type TransactionStatus {
 }
 
 type Transaction {
+  transactionStatus: TransactionStatus!
   id: ID!
-  transactionExternalId: ID
-  status: String!
-  accountExternalIdDebit: ID!
-  accountExternalIdCredit: ID!
+  transactionExternalId: ID!
+  accountExternalIdDebit: String!
+  accountExternalIdCredit: String!
   transferTypeId: Int!
   value: Float!
+  status: String!
   createdAt: DateTime!
-  updatedAt: DateTime
-  transactionType: TransactionType
-  transactionStatus: TransactionStatus
+  updatedAt: DateTime!
+  transactionType: TransactionType!
 }
 
 """
@@ -40,8 +40,18 @@ type Mutation {
 }
 
 input CreateTransactionInput {
-  accountExternalIdDebit: ID!
-  accountExternalIdCredit: ID!
-  transferTypeId: Int!
+  accountExternalIdDebit: String!
+  accountExternalIdCredit: String!
+  transferTypeId: Float!
   value: Float!
+  transactionType: TransactionTypeInput!
+  transactionStatus: TransactionStatusInput
+}
+
+input TransactionTypeInput {
+  name: String!
+}
+
+input TransactionStatusInput {
+  name: String
 }

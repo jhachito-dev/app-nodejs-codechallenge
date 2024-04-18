@@ -1,70 +1,36 @@
-// import { Field, InputType } from '@nestjs/graphql';
-// @InputType()
-// export class CreateTransactionInput {
-//   @Field()
-//   accountExternalIdDebit: string;
-//
-//   @Field()
-//   accountExternalIdCredit: string;
-//
-//   @Field()
-//   transferTypeId: number;
-//
-//   @Field()
-//   value: number;
-//
-//   @Field({ nullable: true })
-//   transactionExternalId?: string;
-//
-//   @Field({ nullable: true })
-//   transactionType?: { name: number };
-//
-//   @Field({ nullable: true })
-//   transactionStatus?: { name: string };
-// }
-import { ObjectType, Field, ID, Float, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
-@ObjectType()
-export class TransactionType {
-  @Field(() => String)
+
+@InputType()
+class TransactionTypeInput {
+  @Field()
   name: string;
 }
 
-@ObjectType()
-export class TransactionStatus {
-  @Field(() => String)
-  name: string;
-}
-
-@ObjectType()
-export class Transaction {
-  @Field(() => ID)
-  transactionExternalId: string;
-
-  @Field(() => TransactionType)
-  transactionType: TransactionType;
-
-  @Field(() => TransactionStatus)
-  transactionStatus: TransactionStatus;
-
-  @Field(() => Float)
-  value: number;
-
-  @Field(() => String)
-  createdAt: string;
+@InputType()
+class TransactionStatusInput {
+  @Field(type => String, { nullable: true })
+  name?: string;
 }
 
 @InputType()
 export class CreateTransactionInput {
-  @Field(() => ID)
+  @Field()
   accountExternalIdDebit: string;
 
-  @Field(() => ID)
+  @Field()
   accountExternalIdCredit: string;
 
-  @Field(() => Int)
+  @Field()
   transferTypeId: number;
 
-  @Field(() => Float)
+  @Field()
   value: number;
+
+  @Field(() => TransactionTypeInput)
+  transactionType: TransactionTypeInput;
+
+  @Field(type => TransactionStatusInput, { nullable: true })
+  transactionStatus?: TransactionStatusInput;
+
 }

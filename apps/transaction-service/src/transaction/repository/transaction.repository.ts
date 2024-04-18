@@ -27,8 +27,16 @@ export class TransactionRepository {
       .exec();
   }
 
+  async transactionStatus(id: string, transactionStatus: { "name": string }): Promise<Transaction | null> {
+    return this.transactionModel
+        .findByIdAndUpdate(id, { transactionStatus }, { new: true })
+        .exec();
+  }
+
   async handleTransactionResponse(message: any): Promise<void> {
     const status = message.status === 'Approved' ? 'Approved' : 'Rejected';
+    const transactionStatus = {"name": status}
+    await this.transactionStatus(message.id, transactionStatus);
     await this.updateStatus(message.id, status);
     console.log(`Status updated to ${status} for transaction ${message.id}`);
   }

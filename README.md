@@ -1,3 +1,52 @@
+# Details of my solution to the challenge :rocket:
+primera medida se utiliza base de datos mongo para llevar a cabo el desarrollo considerando que al ser una base de datos no relacional nos puede ofrecer un mejor performan en latas concurrencias de escritura y lectura
+
+# Stack
+
+<ol>
+  <li>NestJS</li>
+  <li>mongodb</li>
+  <li>Kafka</li>
+  <li>GrahpQl</li>
+</ol>
+
+# Como ejecutar los servicios
+<ol>
+  <li>en la raiz del proyecto ejecutar docker-compose up -d para levatar el docker con kafka y mongodb, serciorar que se este ejecutando Docker en tu maquina local</li>
+- docker-compose up -d
+  <li>Para levantar el servicio transaction-service ejecutar desde una consola el siguiente comando</li>
+- nest start transaction-service
+  <li>para levantar el servicio anti-fraud-service ejecutar desde una consola diferente dentro de raiz del proyecto ejecutar el siguiente comando</li>
+- nest start anti-fraud-service
+</ol>
+
+1. Peticiones postman con GrahpQl, crear transferecia:
+URL: http://localhost:3000/graphql
+```json
+{
+  "query": "mutation($input: CreateTransactionInput!) { createTransaction(input: $input) { id status value createdAt } }",
+  "variables": {
+    "input": {
+      "accountExternalIdDebit": "{{$guid}}",
+      "accountExternalIdCredit": "{{$guid}}",
+      "transferTypeId": 1,
+      "value": 1000
+    }
+  }
+}
+```
+![img_1.png](img_1.png)
+2. Peticiones postman con GrahpQl, listar transferecia:
+URL: http://localhost:3000/graphql
+```json
+{
+  "query": "query($id: String!) { getTransaction(id: $id) { transactionExternalId transactionType{name} transactionStatus {name} value createdAt } }",
+  "variables": {
+    "id": "662094e582ee185199fda767"
+  }
+}
+```
+![img_2.png](img_2.png)
 # Yape Code Challenge :rocket:
 
 Our code challenge will let you marvel us with your Jedi coding skills :smile:. 
