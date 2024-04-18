@@ -1,6 +1,5 @@
-# Details of my solution to the challenge :rocket:
-primera medida se utiliza base de datos mongo para llevar a cabo el desarrollo considerando que al ser una base de datos no relacional nos puede ofrecer un mejor performan en latas concurrencias de escritura y lectura
-
+# Details of my solution to the challenge
+As an initial step, we have chosen to use MongoDB, a non-relational database, for the project development. This choice is based on the fact that MongoDB can provide superior performance in scenarios of high concurrency in both reading and writing.
 # Stack
 
 <ol>
@@ -10,17 +9,17 @@ primera medida se utiliza base de datos mongo para llevar a cabo el desarrollo c
   <li>GrahpQl</li>
 </ol>
 
-# Como ejecutar los servicios
+# How to run the services
 <ol>
-  <li>en la raiz del proyecto ejecutar docker-compose up -d para levatar el docker con kafka y mongodb, serciorar que se este ejecutando Docker en tu maquina local</li>
+  <li>At the root of the project, execute the command docker-compose up -d to start the Docker services containing Kafka and MongoDB. Ensure that Docker is running on your local machine before proceeding.</li>
 - docker-compose up -d
-  <li>Para levantar el servicio transaction-service ejecutar desde una consola el siguiente comando</li>
+  <li>To start the transaction-service, open a console and execute the following command</li>
 - nest start transaction-service
-  <li>para levantar el servicio anti-fraud-service ejecutar desde una consola diferente dentro de raiz del proyecto ejecutar el siguiente comando</li>
+  <li>To start the anti-fraud-service, open a new console within the root of the project and execute the following command</li>
 - nest start anti-fraud-service
 </ol>
 
-1. Peticiones postman con GrahpQl, crear transferecia:
+1. Postman requests with GraphQL, create transfer:
 URL: http://localhost:3000/graphql
 ```json
 {
@@ -36,7 +35,7 @@ URL: http://localhost:3000/graphql
 }
 ```
 ![img_1.png](img_1.png)
-2. Peticiones postman con GrahpQl, listar transferecia:
+2. Postman requests with GraphQL, list transfer:
 URL: http://localhost:3000/graphql
 ```json
 {
